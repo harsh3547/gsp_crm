@@ -21,7 +21,7 @@ class crm_claim(osv.osv):
           obj=self.pool.get('mail.compose.message')
           id=obj.create(cr,uid,{},context)
           ir_model_data = self.pool.get('ir.model.data')
-          template_id = ir_model_data.get_object_reference(cr, uid, 'gsp_demo', 'email_template_edi_claim')[1]
+          template_id = ir_model_data.get_object_reference(cr, uid, 'gsp_crm', 'email_template_edi_claim')[1]
           claim_id = super(crm_claim,self).create(cr,uid,vals,context)
           values=obj.onchange_template_id(cr,uid,[id],template_id,'comment','crm.claim',claim_id,context)
           value_body=values.get('value').get('body')

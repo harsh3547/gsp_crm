@@ -16,15 +16,12 @@ class crm_lead(osv.osv):
         for id1 in ids:
             print " in _fun_field3 id=",id1
             res[id1]=0
-            try:
-                i=self.pool.get('crm.lead').browse(cr,uid,id1)
-                if i.ref and i.ref._name=='sale.order':
-                    a=self.pool.get('sale.order').browse(cr,uid,i.ref.id)
-                    untaxed=a.amount_untaxed
-                    print " untaxed",untaxed
-                    self.write(cr,uid,[id1],{'planned_revenue':untaxed},context)
-            except:
-                print "error in _fun_field_3 in crm_lead.py"
+            i=self.pool.get('crm.lead').browse(cr,uid,id1)
+            if i.ref and i.ref._name=='sale.order':
+                a=self.pool.get('sale.order').browse(cr,uid,i.ref.id)
+                untaxed=a.amount_untaxed
+                print " untaxed",untaxed
+                self.write(cr,uid,[id1],{'planned_revenue':untaxed},context)
         return res
     
     def _get_ids(self,cr,uid,ids,context=None):
