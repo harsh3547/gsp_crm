@@ -10,8 +10,8 @@ class sale_order(osv.osv):
     def _fun_field4(self,cr,uid,ids,name,arg,context=None):
         print "ids in funfield 4",ids
         uid=SUPERUSER_ID
-	print "------------------in gsp_crm uid ==",uid
-	res={}
+        print "------------------in gsp_crm uid ==",uid
+        res={}
         for id in ids:
             res[id]=False
             try:
@@ -36,6 +36,7 @@ class sale_order(osv.osv):
    
     # overriding the action_button_confirm(confirm sale order) method to run the 'mark won' button in the related opportunity
     def action_button_confirm(self, cr, uid, ids, context=None):
+        print "------in action_button_confirm----in gsp_crm=-=-=-=-=-"
         result =  super(sale_order,self).action_button_confirm(cr, uid, ids, context)
         try:
             origin=self.browse(cr,uid,ids[0]).origin
