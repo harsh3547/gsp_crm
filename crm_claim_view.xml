@@ -1,0 +1,24 @@
+<openerp>
+	<data>
+       
+		
+		
+		<record id="view_inheritance_claim1" model="ir.ui.view">
+            <field name="name">make two field required</field>
+            <field name="model">crm.claim</field>
+            <field name="inherit_id" ref="crm_claim.crm_case_claims_form_view" />
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='partner_id']" position= "attributes">
+					<attribute name="required">1</attribute>
+				</xpath>
+				
+				<xpath expr="/form/sheet/group/notebook/page/group/field[@name='email_from']" position= "attributes">
+					<attribute name="required">1</attribute>
+				</xpath>
+			</field>
+		</record>
+		
+		
+		
+		</data>
+		</openerp>
