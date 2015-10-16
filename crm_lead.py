@@ -11,21 +11,24 @@ class crm_lead(osv.osv):
     # functional field to get the expected revenue from the quotation to the opportunity
     # overriding the planned_revenue field...making it a functional field
     def _fun_field3(self,cr,uid,ids,name,arg,context=None):
-        print " in _fun_field3"
+	print " in _fun_field3"
         res={}
         for id1 in ids:
             print " in _fun_field3 id=",id1
             res[id1]=0
-            i=self.pool.get('crm.lead').browse(cr,uid,id1)
-            if i.ref and i.ref._name=='sale.order':
-                a=self.pool.get('sale.order').browse(cr,uid,i.ref.id)
-                untaxed=a.amount_untaxed
-                print " untaxed",untaxed
-                self.write(cr,uid,[id1],{'planned_revenue':untaxed},context)
+            try:
+                i=self.pool.get('crm.lead').browse(cr,uid,id1)
+                if i.ref and i.ref._name=='sale.order':
+                    a=self.pool.get('sale.order').browse(cr,uid,i.ref.id)
+                    untaxed=a.amount_untaxed
+                    print " untaxed",untaxed
+                    self.write(cr,uid,[id1],{'planned_revenue':untaxed},context)
+            except:
+                print "error in _fun_field_3 in crm_lead.py"
         return res
     
     def _get_ids(self,cr,uid,ids,context=None):
-        print " in _get_ids",ids
+	print " in _get_ids",ids
         list_of_ids=[]
         '''sale_line=[]
         for id in ids:
